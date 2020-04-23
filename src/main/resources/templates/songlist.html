@@ -25,7 +25,7 @@
 			<td th:text="${song.artist}">artist</td>
 			<td th:text="${song.album}">album</td>
 			<td th:text="${song.year}">year</td>
-			<td th:text="${song.genre}">genre</td>
+			<td th:text="${song.genre.name}">genre</td>
 			
 			
 			<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/deletesong/{id}(id=${song.id})}" class="btn btn-danger">Delete</a></td>

@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,9 +27,8 @@ public class Song {
 		
 	}
  	
-	public Song(Long id, String title, String artist, String album, int year, Genre genre) {
+	public Song(String title, String artist, String album, int year, Genre genre) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.artist = artist;
 		this.album = album;

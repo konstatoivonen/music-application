@@ -40,10 +40,10 @@ public CommandLineRunner songDemo(SongRepository songRepository, GenreRepository
 		genreRepository.save(new Genre("Folkmetal"));
 		
 		log.info("Testing adding songs");
-		songRepository.save(new Song((long) 1, "Thank God", "Counterparts", "The Current Will Carry Us", 2011, genreRepository.findByName("Hardcore").get(0)));
-		songRepository.save(new Song((long) 2, "Hate of All Hatreds", "Deicide", "Till Death Do Us Part", 2008, genreRepository.findByName("Deathmetal").get(0)));
-		songRepository.save(new Song((long) 3, "Down and Out", "Adept", "Sleepless", 2016, genreRepository.findByName("Post-Hardcore").get(0)));
-		songRepository.save(new Song((long) 2, "Freezing Moon", "Mayhem", "De Mysteriis Dom Sathanas", 1994, genreRepository.findByName("Blackmetal").get(0)));
+		songRepository.save(new Song("Thank God", "Counterparts", "The Current Will Carry Us", 2011, genreRepository.findByName("Hardcore").get(0)));
+		songRepository.save(new Song("Hate of All Hatreds", "Deicide", "Till Death Do Us Part", 2008, genreRepository.findByName("Deathmetal").get(0)));
+		songRepository.save(new Song("Down and Out", "Adept", "Sleepless", 2016, genreRepository.findByName("Post-Hardcore").get(0)));
+		songRepository.save(new Song("Freezing Moon", "Mayhem", "De Mysteriis Dom Sathanas", 1994, genreRepository.findByName("Blackmetal").get(0)));
 		
 		log.info("fetch all songs");
 		for (Song song : songRepository.findAll()) {

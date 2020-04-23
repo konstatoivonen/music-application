@@ -53,7 +53,7 @@ public class Genre {
 	
 	@Override
 	public String toString() {
-		return name; 
+		return "Genre [genreid=" + genreid + ", name=" + name + "]"; 
 	}
 	
 	
