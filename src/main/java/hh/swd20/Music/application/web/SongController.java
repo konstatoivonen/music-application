@@ -12,17 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import hh.swd20.Music.application.domain.GenreRepository;
 import hh.swd20.Music.application.domain.Song;
 import hh.swd20.Music.application.domain.SongRepository;
 
 @Controller
 public class SongController {
 	@Autowired
-	SongRepository songRepository;
+	private SongRepository songRepository;
+	@Autowired
+	private GenreRepository genreRepository;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String index() {
 		return "redirect:/songlist";
+	}
+	
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
 	}
 	
 	@RequestMapping(value="/songlist", method = RequestMethod.GET)
@@ -40,6 +48,7 @@ public class SongController {
 	@RequestMapping(value="/newsong", method = RequestMethod.GET)
 	public String getNewSong(Model model) {
 		model.addAttribute("song", new Song());
+		model.addAttribute("genres", genreRepository.findAll());
 		return "addsong";
 	}
 	

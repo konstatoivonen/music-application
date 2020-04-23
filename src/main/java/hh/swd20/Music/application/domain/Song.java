@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Song {
@@ -15,17 +19,23 @@ public class Song {
 	private String album;
 	private int year;
 	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "genreid")
+	private Genre genre;
+	
 	public Song() {
 		
 	}
  	
-	public Song(Long id, String title, String artist, String album, int year) {
+	public Song(Long id, String title, String artist, String album, int year, Genre genre) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.artist = artist;
 		this.album = album;
 		this.year = year;
+		this.genre = genre;
 	}
 
 	
@@ -70,9 +80,21 @@ public class Song {
 		this.id = id;
 	}
 	
+	public Genre getGenre() {
+		return genre;
+	}
+	
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	
 	@Override
 	public String toString() {
-		return "Song [id=" + id + ", title=" + title + ", artist=" + artist + ", album=" + album + ", year=" + year + "]";
+		if (this.genre != null)
+			return "Song [id=" + id + ", title=" + title + ", artist=" + artist + ", album=" + album + ", year=" + year + ", genre=" + this.getGenre() + "]";
+		else
+			return "Song [id=" + id + ", title=" + title + ", artist=" + artist + ", album=" + album + ", year=" + year + "]";
+	
 	}
 	
 	

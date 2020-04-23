@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<meta charset="UTF-8">
-<title>Song list</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<title>Song list</title>
 </head>
 <body>
-	<h1>Songs</h1>
-	
-	<table>
+	<div class="col-md-4">
+		<h1>Songs</h1>
+	</div>
+	<table class="table table-striped">
 		<tr>
 			<th>Id</th>
 			<th>Title</th>
 			<th>Artist</th>
 			<th>Album</th>
 			<th>Year</th>
+			<th>Genre</th>
 		</tr>
 		
 		<tr th:each="song : ${songs}">
@@ -22,11 +25,26 @@
 			<td th:text="${song.artist}">artist</td>
 			<td th:text="${song.album}">album</td>
 			<td th:text="${song.year}">year</td>
-			<td> <a th:href="@{/deletesong/{id}(id=${song.id})}" class="btn btn-danger">Delete</a></td>
+			<td th:text="${song.genre}">genre</td>
+			
+			
+			<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/deletesong/{id}(id=${song.id})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
 	
-	<a href="/newsong">Add a song</a>
+	<a href="/newsong" class="btn btn-success" sec:authorize="hasAuthority('ADMIN')">Add a song</a>
+	
+	<div style="padding:20px 0">
+		<form th:action="@{/login}" method="post">
+			<input type="submit" value="Log in" class="btn btn-danger"/>
+		</form>
+	</div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign out" class="btn btn-danger"/>
+		</form>
+	</div>
 	
 </body>
 </html>
