@@ -30,14 +30,14 @@ public CommandLineRunner songDemo(SongRepository songRepository, GenreRepository
 		
 		log.info("Testing adding genres");
 		genreRepository.save(new Genre("Hardcore"));
-		genreRepository.save(new Genre("Metal"));
 		genreRepository.save(new Genre("Post-Hardcore"));
-		genreRepository.save(new Genre("Punk"));
-		genreRepository.save(new Genre("Deathmetal"));
-		genreRepository.save(new Genre("Blackmetal"));
-		genreRepository.save(new Genre("Grindcore"));
 		genreRepository.save(new Genre("Metalcore"));
-		genreRepository.save(new Genre("Folkmetal"));
+		genreRepository.save(new Genre("Blackmetal"));
+		genreRepository.save(new Genre("Deathmetal"));
+		genreRepository.save(new Genre("Punk"));
+		genreRepository.save(new Genre("Dance"));
+		genreRepository.save(new Genre("Hiphop"));
+		genreRepository.save(new Genre("Pop"));
 		
 		log.info("Testing adding songs");
 		songRepository.save(new Song("Thank God", "Counterparts", "The Current Will Carry Us", 2011, genreRepository.findByName("Hardcore").get(0)));

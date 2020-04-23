@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +44,7 @@ public class SongController {
 	public @ResponseBody List <Song> songListRest() {
 		return (List<Song>)songRepository.findAll();
 	}
-	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/newsong", method = RequestMethod.GET)
 	public String getNewSong(Model model) {
 		model.addAttribute("song", new Song());
@@ -53,9 +53,9 @@ public class SongController {
 	}
 	
 	@RequestMapping(value="/savesong", method = RequestMethod.POST)
-	public String saveSong(@ModelAttribute Song song) {
+	public String saveSong(Song song) {
 		songRepository.save(song);
-		return "redirect:/songlist";
+		return "redirect:songlist";
 	}
 	
 	@RequestMapping(value="/deletesong/{id}", method = RequestMethod.GET)

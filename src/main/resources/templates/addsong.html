@@ -8,17 +8,35 @@
 
 <body>
 	<h1>New song</h1>
+	<div>
 	<div class="col-md-4">
-		<form action="#" th:action="@{/savesong}" method="post" th:object="${song}">
-		<p>Title: <input type="text" th:field="${song.title}"/> </p>
-		<p>Artist: <input type="text" th:field="${song.artist}"/> </p>
-		<p>Album: <input type="text" th:field="${song.album}"/> </p>
-		<p>Year: <input type="text" th:field="${song.year}"/> </p>
-		<p>Genre: <input type="text" th:field="${song.genre}"/> </p>
-		<input type="submit" class="btn-success" value="Save"></input>
+		
+		<form th:object="${song}" th:action="@{savesong}" action="#" method="post">
+				<label for="title">title</label>
+			<input type="text" id="title" th:field="*{title}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="artist">artist</label>
+			<input type="text" id="artist" th:field="*{artist}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="album">album</label>
+			<input type="text" th:field="*{album}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="year">year</label>
+			<input type="text" th:field="*{year}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="genrelist">genre</label>
+			<select id="genre" th:field="*{genre}" class="form-control">
+				<option th:each="genre: ${genres}" th:value="${genre.genreid}" th:text="${genre.name}"></option>
+			</select>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-success" value="Save"></input>
+			
 		</form>
+		
+		
 	</div>
-
+	</div>
  
 </body>
 </html>
